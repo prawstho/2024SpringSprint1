@@ -22,7 +22,10 @@ function createFiles() {
         if(!fs.existsSync(path.join(__dirname, './json/config.json'))) {
             fs.writeFile('./json/config.json', configdata, (err) => {
                 if(err) {
-                    console.log(err)
+                    if (err.code == 'ENOENT')
+                        console.log('No file or directory, has the directory been created.');
+                    else
+                        console.log(err);
                 }
                 else {
                     console.log('Data written to config file.');
@@ -32,7 +35,10 @@ function createFiles() {
           console.log('config file already exists.');
         }
     } catch(err) {
-        console.log(err);
+        if (err.code == 'ENOENT')
+            console.log('no file or directory');
+        else
+            console.log(err);
     }
   };
 
@@ -65,6 +71,8 @@ function initializeApplication() {
     switch (myArgs[1]) {
     case '--all':
         if(DEBUG) console.log('--all createFolders() & createFiles()');
+        createFolders();
+        createFiles();
         break;
     case '--cat':
         if(DEBUG) console.log('--cat createFiles()');
