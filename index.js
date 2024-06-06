@@ -1,6 +1,7 @@
 global.DEBUG = true;
 
 const fs = require('fs');
+const myEventEmitter = require('./logEvents');
 
 const { initializeApplication } = require('./init.js')
 const { configApplication } = require('./config.js')
@@ -30,6 +31,7 @@ switch(myArgs[0]) {
   case '--h':
   default:
     if (DEBUG) console.log(myArgs[0], '- display help');
+    myEventEmitter.emit('event', process.argv, 'WARNING', 'Unrecognized CLI item requested.');
     fs.readFile(__dirname + "/usage.txt", (error, data) => {
       if(error) throw error;
       console.log(data.toString());
