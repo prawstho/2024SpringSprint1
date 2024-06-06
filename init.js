@@ -38,6 +38,7 @@ function createFiles() {
                 }
             })
         } else {
+          myEventEmitter.emit('event', fileName, 'INFO', `The ${fileName} already exists.`);
           console.log('config file already exists.');
         }
     } catch(err) {
