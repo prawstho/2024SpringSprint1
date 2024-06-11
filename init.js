@@ -3,19 +3,9 @@ const fsPromises = require('fs').promises;
 const path = require('path');
 
 const myEventEmitter = require('./logEvents');
+const { folders, configjson, tokenjson } = require('./templates');
 
 const myArgs = process.argv.slice(2);
-
-const folders = ['models', 'views', 'routes', 'logs', 'json'];
-
-const configjson = { 
-    name: 'AppConfigCLI',
-    version: '1.0.0',
-    description: 'The Command Line Interface (CLI) for the MyApp.',
-    main: 'myapp.js',
-    superuser: 'adm1n',
-    database: 'exampledb'
-  };
 
 function createFiles() {
     if(DEBUG) console.log('init.createFiles()');
