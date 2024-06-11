@@ -41,6 +41,22 @@ function newToken(username) {
   return newToken.token;
 }
 
+var tokenCount = function() {
+  if(DEBUG) console.log('token.tokenCount()');
+  return new Promise(function(resolve, reject) {
+      fs.readFile(__dirname + '/json/tokens.json', 'utf-8', (error, data) => {
+          if(error)  
+              reject(error); 
+          else {
+              let tokens = JSON.parse(data);
+              let count = Object.keys(tokens).length;
+              console.log(`Current token count is ${count}.`);
+              resolve(count);
+          };
+      });
+  });
+};
+
 
 function addDays(date, days) {
   var result = new Date(date);
@@ -54,6 +70,7 @@ function tokenApplication() {
   switch (myArgs[1]) {
   case '--count':
     if(DEBUG) console.log('--count');
+    tokenCount();
     break;
   case '--list':
     if(DEBUG) console.log('--list');
@@ -78,4 +95,6 @@ function tokenApplication() {
 
 module.exports = {
   tokenApplication,
+  newToken,
+  tokenCount,
 }

@@ -12,6 +12,7 @@
   "dependencies": {
     "crc": "^4.3.2",
     "date-fns": "^3.6.0",
+    "querystring": "^0.2.1",
     "uuid": "^9.0.1"
   }
 }
